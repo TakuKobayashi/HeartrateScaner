@@ -12,6 +12,10 @@ import android.os.Build;
 import android.view.Surface;
 
 public class Util {
+    static {
+        System.loadLibrary("heartrate_scaner");
+    }
+
     public static int getCameraDisplayOrientation(Activity act, int nCameraID){
         if(Build.VERSION.SDK_INT >= 9){
             Camera.CameraInfo info = new Camera.CameraInfo();
@@ -99,4 +103,6 @@ public class Util {
         }
         return rgb;
     }
+
+    public static native int[] convert(int[] pixcels,int width, int height);
 }
