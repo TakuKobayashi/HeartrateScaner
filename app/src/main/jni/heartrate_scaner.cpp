@@ -46,8 +46,12 @@ JNIEXPORT jintArray JNICALL Java_kobayashi_taku_com_heartratescan_Util_convert(J
 
             int rgb = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
 
-            int gray = (int) (0.298912 * b + 0.586611 * g + 0.114478 * r);
-            if (r > 128) {
+            int alpha = (rgb & 0xFF000000) >> 24;
+            int red = (rgb & 0x00FF0000) >> 16;
+            int green = (rgb & 0x0000FF00) >> 8;
+            int blue = (rgb & 0x000000FF);
+            int gray = (int) (0.298912 * blue + 0.586611 * green + 0.114478 * red);
+            if (red > 128) {
                 ++redLightCounter;
             }
             if (gray > 128) {

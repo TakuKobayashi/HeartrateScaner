@@ -1,8 +1,12 @@
 package kobayashi.taku.com.heartratescan;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class HeartrateField {
+  private static final String TAG = "HeartRateScan";
+
   private int frameWidth = 0;
   private int frameHeight = 0;
 
@@ -16,7 +20,7 @@ public class HeartrateField {
   private int beatCounter = 0;
   //前回とのビートの時でBPがなんとなく出そう
   private long prevBeatSpan = 0;
-  int sumLoopBeatCount;
+  private int sumLoopBeatCount;
   private ArrayList<Integer> bpmList = new ArrayList<Integer>();
 
   public void HeartrateField() {
@@ -29,15 +33,17 @@ public class HeartrateField {
   }
 
   public void setRedLightCount(int count){
+    Log.d(TAG, "redCount:" + count);
     redLightCounter = count;
   }
 
   public void setLightFieldCount(int count){
+    Log.d(TAG, "lightCount:" + count);
     lightFieldCount = count;
   }
 
   public boolean checkBeat(){
-    return redLightCounter < (frameWidth * frameHeight) * 0.9;
+    return redLightCounter > (frameWidth * frameHeight) * 0.9;
   }
 
   public void reset() {
@@ -49,6 +55,9 @@ public class HeartrateField {
   }
 
   public boolean beat() {
+    Log.d(TAG, "w:" + frameWidth + " h:" + frameHeight + "wh:" + frameWidth * frameHeight + " r:" + redLightCounter + " l:" + lightFieldCount);
+    Log.d(TAG, "b:" + beatCounter + " bs:" + prevBeatSpan + " s:" + sumLoopBeatCount);
+
     if (prevSampling == 0) {
       prevSampling = lightFieldCount;
       prevBeatSpan = System.currentTimeMillis();
@@ -64,14 +73,10 @@ public class HeartrateField {
       if (beatCounter == 0) {
         ++sumLoopBeatCount;
         if (sumLoopBeatCount % 2 == 0) {
-          long span = System.currentTimeMillis() - prevBeatSpan;
+          long span = getSpan();
           int bpm = (int) ((float) 1 * 1000 * 60 / span);
           prevBeatSpan = System.currentTimeMillis();
           bpmList.add(bpm);
-          int sum = 0;
-          for (int i = 0; i < bpmList.size(); ++i) {
-            sum += bpmList.get(i);
-          }
           return true;
         }
       }
@@ -84,6 +89,7 @@ public class HeartrateField {
     for(int i = 0;i < bpmList.size();++i) {
       sum += bpmList.get(i);
     }
+    Log.d(TAG, "sum:" + sum + " size:" + bpmList.size());
     return sum / bpmList.size();
   }
 
