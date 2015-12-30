@@ -11,9 +11,6 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.view.Surface;
 
-/**
- * Created by taku on 15/07/04.
- */
 public class Util {
     public static int getCameraDisplayOrientation(Activity act, int nCameraID){
         if(Build.VERSION.SDK_INT >= 9){

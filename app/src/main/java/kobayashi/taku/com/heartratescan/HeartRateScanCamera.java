@@ -6,9 +6,6 @@ import android.hardware.Camera;
 
 import java.util.ArrayList;
 
-/**
- * Created by akizuki on 2015/07/05.
- */
 public class HeartRateScanCamera {
     private Activity mActivity;
     private Camera mCamera;
