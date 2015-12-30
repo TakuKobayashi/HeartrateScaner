@@ -70,8 +70,10 @@ public class Util {
     }
 
     //YUV420 to BMP
-    public static int[] decodeYUV420SP(byte[] yuv420sp, int width, int height, HeartRateScanCamera.DecodePixelListener listener) {
-        int[] rgb = new int[(width * height)];
+    public static int[] decodeYUV420SP(byte[] yuv420sp, int width, int height, HeartrateField heartrate) {
+        int[] rgb = convert(yuv420sp, width, height, heartrate);
+        /*
+        int[] rgb = new int[width * height];
         final int frameSize = width * height;
         for (int j = 0, yp = 0; j < height; j++) {
             int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
@@ -97,8 +99,9 @@ public class Util {
                 rgb[yp] = p;
             }
         }
+        */
         return rgb;
     }
 
-    public static native int[] convert(int[] pixcels,int width, int height);
+    public static native int[] convert(byte[] yuv420sp,int width, int height, HeartrateField heartrate);
 }
