@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HeartrateScan</string>
+    <string name="bpmLabel">BPM:%1$d</string>
+    <string name="scanButtonText">脈拍検知</string>
 </resources>
