@@ -2,6 +2,7 @@ package kobayashi.taku.com.heartratescan;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private HeartRateScanCamera mHeartRateScanCamera;
+    private static final String TAG = "HeartRateScan";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         heartScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "scan!!");
                 mHeartRateScanCamera.scanStart();
             }
         });
