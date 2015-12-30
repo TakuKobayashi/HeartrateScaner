@@ -69,12 +69,8 @@ public class Util {
         return bmpGrayscale;
     }
 
-    public interface DecodeFinishListener{
-        public int onDecode(int pixel, int wIndex, int hIndex);
-    }
-
     //YUV420 to BMP
-    public static int[] decodeYUV420SP(byte[] yuv420sp, int width, int height, DecodeFinishListener listener) {
+    public static int[] decodeYUV420SP(byte[] yuv420sp, int width, int height, HeartRateScanCamera.DecodePixelListener listener) {
         int[] rgb = new int[(width * height)];
         final int frameSize = width * height;
         for (int j = 0, yp = 0; j < height; j++) {

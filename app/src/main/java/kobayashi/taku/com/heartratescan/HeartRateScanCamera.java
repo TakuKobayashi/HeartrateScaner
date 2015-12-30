@@ -47,7 +47,7 @@ public class HeartRateScanCamera {
             public void onPreviewFrame(byte[] data, Camera camera) {
                 lightFieldCount = 0;
                 redLightCounter = 0;
-                int[] rgb = Util.decodeYUV420SP(data, mPreviewSize.width, mPreviewSize.height, new Util.DecodeFinishListener() {
+                int[] rgb = Util.decodeYUV420SP(data, mPreviewSize.width, mPreviewSize.height, new DecodePixelListener() {
                     @Override
                     public int onDecode(int pixel, int wIndex, int hIndex) {
                         int A = Color.alpha(pixel);
@@ -121,5 +121,9 @@ public class HeartRateScanCamera {
 
     public interface HeartScanCallback{
         public void onBeat(int bpm, long beatSpan);
+    }
+
+    public interface DecodePixelListener{
+        public int onDecode(int pixel, int wIndex, int hIndex);
     }
 }
