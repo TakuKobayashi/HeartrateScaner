@@ -33,12 +33,10 @@ public class HeartrateField {
   }
 
   public void setRedLightCount(int count){
-    Log.d(TAG, "redCount:" + count);
     redLightCounter = count;
   }
 
   public void setLightFieldCount(int count){
-    Log.d(TAG, "lightCount:" + count);
     lightFieldCount = count;
   }
 
@@ -55,9 +53,6 @@ public class HeartrateField {
   }
 
   public boolean beat() {
-    Log.d(TAG, "w:" + frameWidth + " h:" + frameHeight + "wh:" + frameWidth * frameHeight + " r:" + redLightCounter + " l:" + lightFieldCount);
-    Log.d(TAG, "b:" + beatCounter + " bs:" + prevBeatSpan + " s:" + sumLoopBeatCount);
-
     if (prevSampling == 0) {
       prevSampling = lightFieldCount;
       prevBeatSpan = System.currentTimeMillis();
@@ -89,7 +84,6 @@ public class HeartrateField {
     for(int i = 0;i < bpmList.size();++i) {
       sum += bpmList.get(i);
     }
-    Log.d(TAG, "sum:" + sum + " size:" + bpmList.size());
     return sum / bpmList.size();
   }
 
